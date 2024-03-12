@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Employee</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      margin-left:20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      margin-left:20px;
+      
+    }
+    input[type="text"], select, input[type="file"] {
+      width: 10%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-left:20px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-left:20px;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+      margin-left:20px;
+    }
+    .error {
+      color: red;
+      margin-left:20px;
+     
+    }
+  </style>
+</head>
+<body>
+
+<h2>Create Employee</h2>
+<form id="employeeForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+  
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email" required>
+  
+  <label for="mobile">Mobile No:</label>
+  <input type="text" id="mobile" name="mobile" required>
+  
+  <label for="designation">Designation:</label>
+  <select id="designation" name="designation" required>
+    <option value="">Select</option>
+    <option value="HR">HR</option>
+    <option value="Manager">Manager</option>
+    <option value="Sales">Sales</option>
+  </select>
+  
+  <label for="gender">Gender:</label>
+  <input type="radio" id="male" name="gender" value="male"> <label for="male">Male</label>
+  <input type="radio" id="female" name="gender" value="female"> <label for="female">Female</label>
+  
+  <label for="course">Course:</label>
+  <input type="checkbox" id="mca" name="course" value="MCA"> <label for="mca">MCA</label>
+  <input type="checkbox" id="bca" name="course" value="BCA"> <label for="bca">BCA</label>
+  <input type="checkbox" id="bsc" name="course" value="BSC"> <label for="bsc">BSC</label>
+  
+  <label for="img">Img Upload:</label>
+  <input type="file" id="img" name="img" accept="image/png, image/jpeg">
+  
+  <input type="submit" value="Submit">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#employeeForm').submit(function(event) {
+      var errors = false;
+      $('.error').remove();
+      
+      // Email validation
+      var email = $('#email').val();
+      if (!isValidEmail(email)) {
+        $('#email').after('<span class="error">Please enter a valid email</span>');
+        errors = true;
+      }
+      
+      // Mobile number validation
+      var mobile = $('#mobile').val();
+      if (!isValidMobile(mobile)) {
+        $('#mobile').after('<span class="error">Please enter a valid mobile number</span>');
+        errors = true;
+      }
+      
+      // Other validations can be added similarly
+      
+      if (errors) {
+        event.preventDefault();
+      }
+    });
+    
+    // Email validation function
+    function isValidEmail(email) {
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+    
+    // Mobile number validation function
+    function isValidMobile(mobile) {
+      var mobileRegex = /^[0-9]{10}$/;
+      return mobileRegex.test(mobile);
+    }
+  });
+</script>
+
+</body>
+</html>
